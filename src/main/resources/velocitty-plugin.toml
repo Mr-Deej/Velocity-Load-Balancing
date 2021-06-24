@@ -1,0 +1,9 @@
+{
+"id": "loadbalancer",
+"name": "LoadBalancer",
+"version": "${project.version}",
+"description": "Load balancing across multiple game instances",
+"url": "https://github,com/Mr-Deej",
+"authors": ["Mr-Deej"],
+"main": "me.deej.velo.loadbalancer.LoadBalancer"
+}
