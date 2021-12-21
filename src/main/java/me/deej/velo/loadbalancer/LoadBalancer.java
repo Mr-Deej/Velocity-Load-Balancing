@@ -3,6 +3,7 @@ package me.deej.velo.loadbalancer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.inject.Inject;
+import com.velocitypowered.api.command.CommandMeta;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.plugin.Plugin;
@@ -96,17 +97,17 @@ public class LoadBalancer {
      * This method registers the commands
      */
     private void registerCommands() {
-        server.getCommandManager().register(new ReloadCommand(this), "velohub-reload");
-
-        JsonObject commandInfo = config.getObject().getAsJsonObject("hub-command");
-        if (!commandInfo.get("enabled").getAsBoolean())
-            return;
-
-        List<String> aliases = new ArrayList<>();
-        for (JsonElement element : commandInfo.getAsJsonArray("aliases"))
-            aliases.add(element.getAsString());
-
-        server.getCommandManager().register(new LobbyCommand(this), aliases.toArray(new String[0]));
+        CommandMeta.Builder builder = server.getCommandManager().metaBuilder("");
+        server.getCommandManager().register(builder.build(),new ReloadCommand( this));
+        //server.getCommandManager().register(new LobbyCommand(this), aliases.toArray(""));
+        CommandMeta.Builder angery = server.getCommandManager().metaBuilder("");
+        server.getCommandManager().register(angery.build(), new LobbyCommand(this));
     }
+
+
+
+
+    //CommandMeta.Builder builder = server.getCommandManager().metaBuilder("");
+    //server.getCommandManager().register(builder.build(),command);
 
 }
